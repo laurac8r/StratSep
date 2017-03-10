@@ -70,6 +70,8 @@
 #include "G4PhysicalConstants.hh"
 #include "G4UnitsTable.hh"
 
+#include "G4VisManager.hh"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 ExN03VisManager::ExN03VisManager () {}
@@ -124,11 +126,11 @@ void ExN03VisManager::RegisterGraphicsSystems () {
   RegisterGraphicsSystem (new G4VRML2File);
 #endif
 
-  if (fVerbose > 0) {
+  if (GetVerbosity() > 0) {
     G4cout <<
       "\nYou have successfully chosen to use the following graphics systems."
 	 << G4endl;
-    PrintAvailableGraphicsSystems (1);
+    PrintAvailableGraphicsSystems (GetVerbosity());
   }
 }
 

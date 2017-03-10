@@ -16,6 +16,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
 #include "G4UnitsTable.hh"
+#include "G4ParticleTable.hh"
 
 ExN03PhysicsList::ExN03PhysicsList():  G4VUserPhysicsList()
 {
@@ -91,12 +92,15 @@ void ExN03PhysicsList::ConstructProcess()
 #include "G4eplusAnnihilation.hh"
 
 #include "G4hIonisation.hh"
+#include "G4ParticleTable.hh"
 
 void ExN03PhysicsList::ConstructEM()
 {
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
+  theParticleTable = G4ParticleTable::GetParticleTable();
+  aParticleIterator = theParticleTable->GetIterator();
+  aParticleIterator->reset();
+  while( (*aParticleIterator)() ){
+    G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
     G4String particleName = particle->GetParticleName();
      
@@ -137,9 +141,9 @@ void ExN03PhysicsList::ConstructGeneral()
 {
   // Add Decay Process
    G4Decay* theDecayProcess = new G4Decay();
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
+  aParticleIterator->reset();
+  while( (*aParticleIterator)() ){
+    G4ParticleDefinition* particle = aParticleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
     if (theDecayProcess->IsApplicable(*particle)) { 
       pmanager ->AddProcess(theDecayProcess);

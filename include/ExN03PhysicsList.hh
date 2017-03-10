@@ -11,6 +11,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
 #include "G4UnitsTable.hh"
+#include "G4ParticleTable.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
@@ -49,6 +50,9 @@ class ExN03PhysicsList: public G4VUserPhysicsList
     void ConstructEM();
 
   private:
+    G4ParticleTable* theParticleTable;
+    G4ParticleTable::G4PTblDicIterator* aParticleIterator;
+
     G4double cutForGamma;
     G4double cutForElectron; 
     G4double cutForProton;
