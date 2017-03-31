@@ -20,6 +20,10 @@
 
 // Supported drivers...
 
+#ifdef G4VIS_USE_HEPRAPP
+#include "G4HepRep.hh"
+#endif
+
 #ifdef G4VIS_USE_DAWN
 #include "G4FukuiRenderer.hh"
 #endif
@@ -79,6 +83,10 @@ ExN03VisManager::ExN03VisManager () {}
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void ExN03VisManager::RegisterGraphicsSystems () {
+
+#ifdef G4VIS_USE_HEPRAP
+  RegisterGraphicsSystem (new G4HepRep)
+#endif
 
 #ifdef G4VIS_USE_DAWN
   RegisterGraphicsSystem (new G4FukuiRenderer);

@@ -65,5 +65,3 @@ add_custom_target(hasp_exec DEPENDS hasp)
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS hasp DESTINATION bin)
-
-
