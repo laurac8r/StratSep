@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Setup the project
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(HASP)
+project(StratSep)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -35,19 +35,19 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(hasp exampleN03.cc ${sources} ${headers})
-target_link_libraries(hasp ${Geant4_LIBRARIES})
+add_executable(StratSep StratSep.cc ${sources} ${headers})
+target_link_libraries(StratSep ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
-# build HASP. This is so that we can run the executable directly because it
+# build StratSep. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-set(EXAMPLEB1_SCRIPTS
-  prerunN03.mac
+set(StratSep_SCRIPTS
+  init.mac
   )
 
-foreach(_script ${HASP_SCRIPTS})
+foreach(_script ${StratSep_SCRIPTS})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}
     ${PROJECT_BINARY_DIR}/${_script}
@@ -59,9 +59,9 @@ endforeach()
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(hasp_exec DEPENDS hasp)
+add_custom_target(StratSep_exec DEPENDS StratSep)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS hasp DESTINATION bin)
+install(TARGETS StratSep DESTINATION bin)
